@@ -15,12 +15,12 @@ Running the shortcut shows one menu:
 | Choice | Action | Request |
 | --- | --- | --- |
 | **Move Camera** | Pick a preset by name → recall it | `GET /cgi-bin/ptzctrl.cgi?ptzcmd&poscall&{N}` |
-| **Start Stream** | Turn the YouTube RTMP stream on (guarded — see below) | `POST /cgi-bin/param.cgi?post_network_other_conf` |
-| **Stop Stream** | Turn the YouTube RTMP stream off | `POST /cgi-bin/param.cgi?post_network_other_conf` |
+| **Start Camera** | Turn the YouTube RTMP stream on (guarded — see below) | `POST /cgi-bin/param.cgi?post_network_other_conf` |
+| **Stop Camera** | Turn the YouTube RTMP stream off | `POST /cgi-bin/param.cgi?post_network_other_conf` |
 
 All requests are unauthenticated on the local network (the RL500's default config).
 
-### Start Stream safety check
+### Start Camera safety check
 
 Before starting, the shortcut reads the camera's current config
 (`GET /cgi-bin/param.cgi?get_network_conf`) and extracts the `rtmp1_mrl` value
@@ -49,7 +49,7 @@ the camera, so it lives in `src/build.py` (the `PRESETS` list).
 
 ```
 .
-├── rebuild.sh          # build + sign in one command
+├── build.sh            # build + sign in one command
 ├── src/
 │   ├── build.py        # the shortcut definition — THE file you edit
 │   └── original.plist  # untouched original from iCloud; build.py copies its
@@ -63,7 +63,7 @@ the camera, so it lives in `src/build.py` (the `PRESETS` list).
 Requires macOS (uses the built-in `shortcuts` and `plutil` CLIs) and Python 3.
 
 ```sh
-./rebuild.sh
+./build.sh
 ```
 
 This runs `src/build.py` → JSON → binary plist → signs it, producing
@@ -71,7 +71,7 @@ This runs `src/build.py` → JSON → binary plist → signs it, producing
 
 To change behavior, edit `src/build.py` (camera IP / preset / stream defaults are constants
 near the top; the per-menu requests are in the `# --- CASE: ... ---` blocks) and re-run
-`./rebuild.sh`.
+`./build.sh`.
 
 ## Tests
 

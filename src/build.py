@@ -166,7 +166,7 @@ actions.append(action('setvariable', {
 actions.append(action('choosefrommenu', {
     'GroupingIdentifier': MENU_GROUP, 'WFControlFlowMode': 0,
     'WFMenuPrompt': 'Camera Control',
-    'WFMenuItems': ['Move Camera', 'Start Stream', 'Stop Stream']}))
+    'WFMenuItems': ['Move Camera', 'Start Camera', 'Stop Camera']}))
 
 def menu_case(title):
     return action('choosefrommenu', {'GroupingIdentifier': MENU_GROUP,
@@ -235,7 +235,7 @@ actions.append(action('getvalueforkey', {
 actions.append(get_url(['http://', ('var', 'cameraIP'), PTZ + 'poscall&',
                         ('out', 'Dictionary Value', GETVAL)]))
 
-# --- CASE: Start Stream (guarded) ---
+# --- CASE: Start Camera (guarded) ---
 def start_stream():
     return post_form(['http://', ('var', 'cameraIP'), PARAM], [
         ('rtmp1', token(['on'])),
@@ -243,7 +243,7 @@ def start_stream():
         ('rtmp1video', token(['on'])),
         ('rtmp1audio', token(['on']))])
 
-actions.append(menu_case('Start Stream'))
+actions.append(menu_case('Start Camera'))
 # Read the camera's current network/stream config (plain key="value" lines)...
 actions.append(get_url(['http://', ('var', 'cameraIP'), CONF], uuid_=NET_GET))
 # ...and pull out the rtmp1 destination currently loaded on the camera (URL + key).
@@ -271,8 +271,8 @@ actions.append(alert(token([
 actions.append(end_if(GRP_B))
 actions.append(end_if(GRP_A))
 
-# --- CASE: Stop Stream ---
-actions.append(menu_case('Stop Stream'))
+# --- CASE: Stop Camera ---
+actions.append(menu_case('Stop Camera'))
 actions.append(post_form(['http://', ('var', 'cameraIP'), PARAM], [
     ('rtmp1', token(['off']))]))
 
