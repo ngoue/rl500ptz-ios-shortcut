@@ -166,7 +166,7 @@ actions.append(action('setvariable', {
 actions.append(action('choosefrommenu', {
     'GroupingIdentifier': MENU_GROUP, 'WFControlFlowMode': 0,
     'WFMenuPrompt': 'Camera Control',
-    'WFMenuItems': ['Move Camera', 'Start Camera', 'Stop Camera']}))
+    'WFMenuItems': ['Start Camera', 'Stop Camera', 'Move Camera']}))
 
 def menu_case(title):
     return action('choosefrommenu', {'GroupingIdentifier': MENU_GROUP,
@@ -216,25 +216,6 @@ PTZ = '/cgi-bin/ptzctrl.cgi?ptzcmd&'
 PARAM = '/cgi-bin/param.cgi?post_network_other_conf'
 CONF = '/cgi-bin/param.cgi?get_network_conf'
 
-# --- CASE: Move Camera ---
-actions.append(menu_case('Move Camera'))
-# choose a preset name from the presets dictionary keys
-actions.append(action('choosefromlist', {
-    'UUID': LIST,
-    'WFInput': {'Value': {'Aggrandizements': [{'PropertyName': 'Keys',
-                          'Type': 'WFPropertyVariableAggrandizement'}],
-                'Type': 'Variable', 'VariableName': 'presets'},
-                'WFSerializationType': 'WFTextTokenAttachment'}}))
-# map the chosen name -> preset number
-actions.append(action('getvalueforkey', {
-    'UUID': GETVAL,
-    'WFInput': {'Value': {'Type': 'Variable', 'VariableName': 'presets'},
-                'WFSerializationType': 'WFTextTokenAttachment'},
-    'WFDictionaryKey': token([('out', 'Chosen Item', LIST)])}))
-# GET poscall
-actions.append(get_url(['http://', ('var', 'cameraIP'), PTZ + 'poscall&',
-                        ('out', 'Dictionary Value', GETVAL)]))
-
 # --- CASE: Start Camera (guarded) ---
 def start_stream():
     return post_form(['http://', ('var', 'cameraIP'), PARAM], [
@@ -275,6 +256,25 @@ actions.append(end_if(GRP_A))
 actions.append(menu_case('Stop Camera'))
 actions.append(post_form(['http://', ('var', 'cameraIP'), PARAM], [
     ('rtmp1', token(['off']))]))
+
+# --- CASE: Move Camera ---
+actions.append(menu_case('Move Camera'))
+# choose a preset name from the presets dictionary keys
+actions.append(action('choosefromlist', {
+    'UUID': LIST,
+    'WFInput': {'Value': {'Aggrandizements': [{'PropertyName': 'Keys',
+                          'Type': 'WFPropertyVariableAggrandizement'}],
+                'Type': 'Variable', 'VariableName': 'presets'},
+                'WFSerializationType': 'WFTextTokenAttachment'}}))
+# map the chosen name -> preset number
+actions.append(action('getvalueforkey', {
+    'UUID': GETVAL,
+    'WFInput': {'Value': {'Type': 'Variable', 'VariableName': 'presets'},
+                'WFSerializationType': 'WFTextTokenAttachment'},
+    'WFDictionaryKey': token([('out', 'Chosen Item', LIST)])}))
+# GET poscall
+actions.append(get_url(['http://', ('var', 'cameraIP'), PTZ + 'poscall&',
+                        ('out', 'Dictionary Value', GETVAL)]))
 
 # menu END
 actions.append(action('choosefrommenu', {'GroupingIdentifier': MENU_GROUP,

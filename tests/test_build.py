@@ -108,7 +108,7 @@ class MenuTests(unittest.TestCase):
                   if ident(a) == 'choosefrommenu' and params(a).get('WFControlFlowMode') == 0]
         self.assertEqual(len(starts), 1)
         self.assertEqual(params(starts[0])['WFMenuItems'],
-                         ['Move Camera', 'Start Camera', 'Stop Camera'])
+                         ['Start Camera', 'Stop Camera', 'Move Camera'])
 
     def test_no_go_home(self):
         titles = [params(a).get('WFMenuItemTitle') for a in ACTS if ident(a) == 'choosefrommenu']

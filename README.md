@@ -14,9 +14,9 @@ Running the shortcut shows one menu:
 
 | Choice | Action | Request |
 | --- | --- | --- |
-| **Move Camera** | Pick a preset by name → recall it | `GET /cgi-bin/ptzctrl.cgi?ptzcmd&poscall&{N}` |
 | **Start Camera** | Turn the YouTube RTMP stream on (guarded — see below) | `POST /cgi-bin/param.cgi?post_network_other_conf` |
 | **Stop Camera** | Turn the YouTube RTMP stream off | `POST /cgi-bin/param.cgi?post_network_other_conf` |
+| **Move Camera** | Pick a preset by name → recall it | `GET /cgi-bin/ptzctrl.cgi?ptzcmd&poscall&{N}` |
 
 All requests are unauthenticated on the local network (the RL500's default config).
 
