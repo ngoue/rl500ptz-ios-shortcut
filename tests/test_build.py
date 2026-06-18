@@ -26,7 +26,7 @@ SAMPLE_CONF = '''dhcp="0"
 ipaddr="192.168.108.4"
 rtsp_auth_en="0"
 rtmp1_en="1"
-rtmp1_mrl="rtmps://x.rtmp.youtube.com/live2/FAKE-test-key-aaaa-bbbb"
+rtmp1_mrl="rtmps://a.rtmp.youtube.com/live2/FAKE-test-key-aaaa-bbbb"
 rtmp1_video_en="1"
 rtmp2_en="0"
 rtmp2_mrl="rtmp://192.168.100.138/live/stream1"
@@ -231,7 +231,7 @@ class MatchRegexBehaviorTests(unittest.TestCase):
 
     def test_extracts_configured_mrl(self):
         self.assertEqual(re.findall(self.pat, SAMPLE_CONF),
-                         ['rtmps://x.rtmp.youtube.com/live2/FAKE-test-key-aaaa-bbbb'])
+                         ['rtmps://a.rtmp.youtube.com/live2/FAKE-test-key-aaaa-bbbb'])
 
     def test_no_match_when_unset(self):
         self.assertEqual(re.findall(self.pat, 'rtmp1_mrl=""\nrtmp1_en="0"\n'), [])
