@@ -80,8 +80,8 @@ idx = {}   # records action indices that import questions point at
 
 # 0) credit / description comment
 actions.append(action('comment', {'WFCommentActionText':
-    'Camera Control for the RL500 PTZ camera. Adapted from Ryan Okelberry\'s '
-    'original AIDA shortcut. On import you will be asked for the camera IP and the '
+    'Camera Control for the RL500 PTZ camera. Adapted from a previous version of '
+    'this shortcut. On import you will be asked for the camera IP and the '
     'YouTube Stream URL and Stream Key (joined automatically).'}))
 
 # 1) presets dictionary  (preset name -> preset number; configured here, not at import,

@@ -1,12 +1,10 @@
 # RL500 Camera Control
 
 An iOS Shortcut to control an **RL500 PTZ camera** from your iPhone — recall position
-presets, send the camera home, and start/stop its YouTube live stream, all from a single
-menu.
+presets and start/stop its YouTube live stream, all from a single menu.
 
-Adapted from Ryan Okelberry's original AIDA PTZ-NDI-X20 shortcut, rewired for the RL500's
-HTTP API. The shortcut is generated programmatically (`src/build.py`) so it's easy to
-audit and modify.
+Adapted from a previous version of this shortcut, rewired for the RL500's HTTP API. The
+shortcut is generated programmatically (`src/build.py`) so it's easy to audit and modify.
 
 ## What it does
 
