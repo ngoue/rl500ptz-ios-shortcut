@@ -70,7 +70,7 @@ MENU_END     = U()
 CAMERA_IP_DEFAULT  = '192.168.108.4'
 # YouTube gives these as two separate fields; the shortcut joins them as URL/key.
 STREAM_URL_DEFAULT = 'rtmps://a.rtmp.youtube.com/live2'
-STREAM_KEY_DEFAULT = 'xxxx-xxxx-xxxx-xxxx-xxxx'
+STREAM_KEY_DEFAULT = ''   # left blank so the import prompt starts empty
 
 PRESETS = [('Pulpit', '0'), ('Choir', '1'), ('Congregation', '2'),
            ('Organ', '3'), ('Piano', '4')]
@@ -303,7 +303,7 @@ out['WFWorkflowImportQuestions'] = [
      'Text': 'What is your YouTube Stream URL? (e.g. rtmps://a.rtmp.youtube.com/live2)',
      'DefaultValue': STREAM_URL_DEFAULT},
     {'ActionIndex': idx['streamKey'], 'Category': 'Parameter', 'ParameterKey': 'WFDictionaryValue',
-     'Text': 'What is your YouTube Stream Key?', 'DefaultValue': STREAM_KEY_DEFAULT},
+     'Text': 'What is your YouTube Stream Key?'},   # no default — starts empty
 ]
 
 # Importing this module builds `out` (with no side effects) so tests can inspect it;
